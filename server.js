@@ -706,7 +706,8 @@ app.post('/api/lockers/report', (req, res) => {
             [
                 {
                     ID: 1,
-                    LockerID: "A1",
+                    LockerID: "1",
+                    LockerCode: "A1",
                     Phone: "3333333333",
                     PIN: "0000",
                     Active: false,
@@ -717,7 +718,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 2,
-                    LockerID: "A2",
+                    LockerID: "2",
+                    LockerCode: "A2",
                     Phone: "3333333333",
                     PIN: "0000",
                     Active: false,
@@ -728,7 +730,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 3,
-                    LockerID: "A3",
+                    LockerID: "3",
+                    LockerCode: "A3",
                     Phone: "3333333333",
                     PIN: "0000",
                     Active: false,
@@ -739,7 +742,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 4,
-                    LockerID: "A4",
+                    LockerID: "4",
+                    LockerCode: "A4",
                     Phone: "3333333333",
                     PIN: "0000",
                     Active: false,
@@ -750,7 +754,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 5,
-                    LockerID: "A5",
+                    LockerID: "5",
+                    LockerCode: "A5",
                     Phone: "3333333333",
                     PIN: "0000",
                     Active: false,
@@ -761,7 +766,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 6,
-                    LockerID: "D5",
+                    LockerID: "35",
+                    LockerCode: "D5",
                     Phone: "3444444444",
                     PIN: "0000",
                     Active: false,
@@ -772,7 +778,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 7,
-                    LockerID: "C5",
+                    LockerID: "25",
+                    LockerCode: "C5",
                     Phone: "3555555555",
                     PIN: "0000",
                     Active: false,
@@ -783,7 +790,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 8,
-                    LockerID: "B7",
+                    LockerID: "17",
+                    LockerCode: "B7",
                     Phone: "3555555555",
                     PIN: "0000",
                     Active: false,
@@ -794,7 +802,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 9,
-                    LockerID: "D6",
+                    LockerID: "36",
+                    LockerCode: "D6",
                     Phone: "3555555555",
                     PIN: "0000",
                     Active: false,
@@ -805,7 +814,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 10,
-                    LockerID: "D10",
+                    LockerID: "40",
+                    LockerCode: "D10",
                     Phone: "3000000000",
                     PIN: "0000",
                     Active: false,
@@ -816,7 +826,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 11,
-                    LockerID: "B8",
+                    LockerID: "18",
+                    LockerCode: "B8",
                     Phone: "3333333333",
                     PIN: "3333",
                     Active: false,
@@ -827,7 +838,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 12,
-                    LockerID: "B1",
+                    LockerID: "11",
+                    LockerCode: "B1",
                     Phone: "3333333333",
                     PIN: "3333",
                     Active: false,
@@ -838,7 +850,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 13,
-                    LockerID: "A6",
+                    LockerID: "6",
+                    LockerCode: "A6",
                     Phone: "3333333333",
                     PIN: "3333",
                     Active: false,
@@ -849,7 +862,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 14,
-                    LockerID: "B10",
+                    LockerID: "20",
+                    LockerCode: "B10",
                     Phone: "3333333333",
                     PIN: "3333",
                     Active: false,
@@ -860,7 +874,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 15,
-                    LockerID: "D4",
+                    LockerID: "4",
+                    LockerCode: "D4",
                     Phone: "3333333333",
                     PIN: "3333",
                     Active: false,
@@ -871,7 +886,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 16,
-                    LockerID: "C6",
+                    LockerID: "26",
+                    LockerCode: "C6",
                     Phone: "3666666666",
                     PIN: "0000",
                     Active: false,
@@ -882,7 +898,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 17,
-                    LockerID: "B4",
+                    LockerID: "14",
+                    LockerCode: "B4",
                     Phone: "3666666666",
                     PIN: "0000",
                     Active: false,
@@ -893,7 +910,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 18,
-                    LockerID: "A7",
+                    LockerID: "7",
+                    LockerCode: "A7",
                     Phone: "3666666666",
                     PIN: "0000",
                     Active: false,
@@ -904,7 +922,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 19,
-                    LockerID: "C3",
+                    LockerID: "23",
+                    LockerCode: "C3",
                     Phone: "3666666666",
                     PIN: "0000",
                     Active: false,
@@ -915,7 +934,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 20,
-                    LockerID: "C10",
+                    LockerID: "30",
+                    LockerCode: "C10",
                     Phone: "3666666666",
                     PIN: "0000",
                     Active: false,
@@ -926,7 +946,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 21,
-                    LockerID: "B2",
+                    LockerID: "12",
+                    LockerCode: "B2",
                     Phone: "3666666666",
                     PIN: "0000",
                     Active: false,
@@ -937,7 +958,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 22,
-                    LockerID: "D9",
+                    LockerID: "39",
+                    LockerCode: "D9",
                     Phone: "3666666666",
                     PIN: "0000",
                     Active: false,
@@ -948,7 +970,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 23,
-                    LockerID: "A9",
+                    LockerID: "9",
+                    LockerCode: "A9",
                     Phone: "3222222222",
                     PIN: "0000",
                     Active: false,
@@ -959,7 +982,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 24,
-                    LockerID: "B4",
+                    LockerID: "14",
+                    LockerCode: "B4",
                     Phone: "3222222222",
                     PIN: "0000",
                     Active: false,
@@ -970,7 +994,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 25,
-                    LockerID: "C2",
+                    LockerID: "22",
+                    LockerCode: "C2",
                     Phone: "3222222222",
                     PIN: "0000",
                     Active: false,
@@ -981,7 +1006,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 26,
-                    LockerID: "C7",
+                    LockerID: "27",
+                    LockerCode: "C7",
                     Phone: "3222222222",
                     PIN: "0000",
                     Active: false,
@@ -992,7 +1018,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 27,
-                    LockerID: "D7",
+                    LockerID: "37",
+                    LockerCode: "D7",
                     Phone: "3222222222",
                     PIN: "0000",
                     Active: false,
@@ -1003,7 +1030,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 28,
-                    LockerID: "B3",
+                    LockerID: "13",
+                    LockerCode: "B3",
                     Phone: "3111111111",
                     PIN: "0000",
                     Active: false,
@@ -1014,7 +1042,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 29,
-                    LockerID: "A8",
+                    LockerID: "8",
+                    LockerCode: "A8",
                     Phone: "3111111111",
                     PIN: "0000",
                     Active: false,
@@ -1025,7 +1054,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 30,
-                    LockerID: "B6",
+                    LockerID: "16",
+                    LockerCode: "B6",
                     Phone: "3111111111",
                     PIN: "0000",
                     Active: false,
@@ -1036,7 +1066,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 31,
-                    LockerID: "B9",
+                    LockerID: "19",
+                    LockerCode: "B9",
                     Phone: "3111111111",
                     PIN: "0000",
                     Active: false,
@@ -1047,7 +1078,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 32,
-                    LockerID: "D9",
+                    LockerID: "39",
+                    LockerCode: "D9",
                     Phone: "3111111111",
                     PIN: "0000",
                     Active: false,
@@ -1058,7 +1090,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 33,
-                    LockerID: "C9",
+                    LockerID: "29",
+                    LockerCode: "C9",
                     Phone: "3888888888",
                     PIN: "0000",
                     Active: false,
@@ -1069,7 +1102,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 34,
-                    LockerID: "C1",
+                    LockerID: "21",
+                    LockerCode: "C1",
                     Phone: "3888888888",
                     PIN: "0000",
                     Active: false,
@@ -1080,7 +1114,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 35,
-                    LockerID: "A10",
+                    LockerID: "10",
+                    LockerCode: "A10",
                     Phone: "3888888888",
                     PIN: "0000",
                     Active: false,
@@ -1091,7 +1126,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 36,
-                    LockerID: "B5",
+                    LockerID: "15",
+                    LockerCode: "B5",
                     Phone: "3888888888",
                     PIN: "0000",
                     Active: false,
@@ -1102,7 +1138,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 37,
-                    LockerID: "D8",
+                    LockerID: "38",
+                    LockerCode: "D8",
                     Phone: "3888888888",
                     PIN: "0000",
                     Active: false,
@@ -1113,7 +1150,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 38,
-                    LockerID: "C8",
+                    LockerID: "28",
+                    LockerCode: "C8",
                     Phone: "3888888888",
                     PIN: "0000",
                     Active: false,
@@ -1124,7 +1162,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 39,
-                    LockerID: "D10",
+                    LockerID: "40",
+                    LockerCode: "D10",
                     Phone: "3888888888",
                     PIN: "0000",
                     Active: false,
@@ -1135,7 +1174,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 40,
-                    LockerID: "D4",
+                    LockerID: "44",
+                    LockerCode: "D4",
                     Phone: "3103192771",
                     PIN: "0000",
                     Active: false,
@@ -1146,7 +1186,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 41,
-                    LockerID: "D8",
+                    LockerID: "38",
+                    LockerCode: "D8",
                     Phone: "3103192771",
                     PIN: "5555",
                     Active: true,
@@ -1157,7 +1198,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 42,
-                    LockerID: "D7",
+                    LockerID: "37",
+                    LockerCode: "D7",
                     Phone: "3103192772",
                     PIN: "0000",
                     Active: true,
@@ -1168,7 +1210,8 @@ app.post('/api/lockers/report', (req, res) => {
                 },
                 {
                     ID: 43,
-                    LockerID: "D5",
+                    LockerID: "35",
+                    LockerCode: "D5",
                     Phone: "3444444444",
                     PIN: "4444",
                     Active: false,
