@@ -29,7 +29,7 @@ wss.on('connection', (ws) => {
 
     // Enviar mensaje cada 5 segundos
     const pingInterval = setInterval(() => {
-        if (data.total < 1000) {
+        if (data.total < 1500) {
             data.total += 200;
             data.complete = false;
         } else {
@@ -41,7 +41,7 @@ wss.on('connection', (ws) => {
             ws.send(JSON.stringify(data));
             console.log('Enviado al cliente:', data);
         }
-    }, 2000);
+    }, 1000);
 
     // Recibir mensajes del cliente
     ws.on('message', (message) => {
@@ -69,7 +69,7 @@ app.post('/api/lockers/assign', (req, res) => {
             message: "Casillero asignado y abierto exitosamente",
             lockerCode: "F10"
         });
-    }, 5000);
+    }, 15000);
     // return res.status(500).json({
     //     success: false,
     //     message: 'Error al asignar el casillero',
@@ -87,6 +87,25 @@ app.post('/api/lockers/open-session', (req, res) => {
             success: true,
             message: "Casillero abierto exitosamente",
             lockerCode: "B8"
+        });
+    }, 10000);
+    // return res.status(500).json({
+    //     success: false,
+    //     message: 'Error al abrir el casillero',
+    // });
+});
+
+// Ruta REST simulada
+app.post('/api/lockers/open-reserve', (req, res) => {
+    console.log('Llamado a /api/lockers/open-reserve');
+    console.log('Headers: ', req.headers);
+    console.log('Payload recibido:', req.body);
+    setTimeout(() => {
+        console.log('response');
+        res.json({
+            success: true,
+            message: "Casillero abierto exitosamente",
+            lockerCode: "C9"
         });
     }, 3000);
     // return res.status(500).json({
@@ -111,6 +130,25 @@ app.post('/api/lockers/open-by-code', (req, res) => {
     // return res.status(500).json({
     //     success: false,
     //     message: 'Error al abrir el casillero',
+    // });
+});
+
+// Ruta REST simulada
+app.post('/api/lockers/reserve', (req, res) => {
+    console.log('Llamado a /api/lockers/reserve');
+    console.log('Headers: ', req.headers);
+    console.log('Payload recibido:', req.body);
+    setTimeout(() => {
+        console.log('response');
+        res.json({
+            success: true,
+            message: "Casillero reservado exitosamente",
+            lockerCode: "C9"
+        });
+    }, 3000);
+    // return res.status(500).json({
+    //     success: false,
+    //     message: 'Error al reservar el casillero',
     // });
 });
 
