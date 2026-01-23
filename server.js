@@ -8,6 +8,54 @@ const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 const PORT = 8080;
 
+const wsClients = new Set();
+let pendingAssign = null;
+
+function clearPendingAssign() {
+    if (pendingAssign?.timer) {
+        clearTimeout(pendingAssign.timer);
+    }
+    pendingAssign = null;
+}
+
+function startAssignFlow(ws) {
+    if (!ws || ws.readyState !== WebSocket.OPEN) return;
+
+    if (ws._assignInterval) {
+        clearInterval(ws._assignInterval);
+        ws._assignInterval = null;
+    }
+
+    // Reiniciar data para este cliente
+    let data = {
+        total: 0,
+        complete: false,
+    };
+
+    // Enviar mensaje cada 1 segundo
+    ws._assignInterval = setInterval(() => {
+        if (data.total < 1500) {
+            data.total += 300;
+            data.complete = false;
+
+            if (ws.readyState === WebSocket.OPEN) {
+                const payload = { type: 'PAYMENT_UPDATE', total: data.total };
+                ws.send(JSON.stringify(payload));
+                console.log('Enviado al cliente:', payload);
+            }
+        } else {
+            data.complete = true;
+            if (ws.readyState === WebSocket.OPEN) {
+                const payload = { type: 'PAYMENT_COMPLETED', total: 5000 };
+                ws.send(JSON.stringify(payload));
+                console.log('Enviado al cliente:', payload);
+            }
+            clearInterval(ws._assignInterval);
+            ws._assignInterval = null;
+        }
+    }, 1000);
+}
+
 app.use(cors());
 app.use(express.json());
 
@@ -20,79 +68,118 @@ app.get('/', (req, res) => {
 // WebSocket por cliente
 wss.on('connection', (ws) => {
     console.log('Cliente conectado');
-
-    // Reiniciar data para este cliente
-    let data = {
-        total: 0,
-        complete: false
-    };
-
-    // Enviar mensaje cada 5 segundos
-    const pingInterval = setInterval(() => {
-        if (data.total < 1500) {
-            data.total += 200;
-            data.complete = false;
-        } else {
-            data.complete = true;
-            clearInterval(pingInterval); // detener mensajes
-        }
-
-        if (ws.readyState === WebSocket.OPEN) {
-            ws.send(JSON.stringify(data));
-            console.log('Enviado al cliente:', data);
-        }
-    }, 1000);
+    wsClients.add(ws);
 
     // Recibir mensajes del cliente
     ws.on('message', (message) => {
-        console.log('Mensaje recibido del cliente:', message);
-        // Puedes enviar eco si quieres
-        ws.send(JSON.stringify({ type: 'eco', text: `Recibido: ${message}` }));
+        const rawText = Buffer.isBuffer(message) ? message.toString('utf8') : String(message);
+        console.log('Mensaje recibido del cliente:', rawText);
+        try {
+            const payload = JSON.parse(rawText);
+            if (payload?.type === 'CONNECT') {
+                const connected = { type: "CONNECTED" };
+                console.log('Enviado al cliente:', connected);
+                ws.send(JSON.stringify(connected));
+                return;
+            }
+            if (payload?.type === 'PING') {
+                const pong = { type: "PONG" };
+                console.log('Enviado al cliente:', pong);
+                ws.send(JSON.stringify(pong));
+                return;
+            }
+            if (payload?.type === 'PAYMENT_CANCEL') {
+                console.log('PAYMENT_CANCEL recibido');
+                if (ws._assignInterval) {
+                    clearInterval(ws._assignInterval);
+                    ws._assignInterval = null;
+                }
+                const canceled = { type: 'PAYMENT_CANCELED' };
+                console.log('Enviado al cliente:', canceled);
+                ws.send(JSON.stringify(canceled));
+                if (pendingAssign?.res && !pendingAssign.res.headersSent) {
+                    setTimeout(() => {
+                        if (pendingAssign?.res && !pendingAssign.res.headersSent) {
+                            pendingAssign.res.status(499).json({
+                                success: false,
+                                message: 'operación cancelda',
+                            });
+                        }
+                        clearPendingAssign();
+                    }, 2000);
+                    return;
+                }
+                clearPendingAssign();
+                return;
+            }
+        } catch (e) {
+            // Mensaje no JSON
+        }
+
+        // Eco por defecto
+        const echo = { type: 'eco', text: `Recibido: ${rawText}` };
+        console.log('Enviado al cliente:', echo);
+        ws.send(JSON.stringify(echo));
     });
 
     // Al cerrar cliente
-    // ws.on('close', () => {
-    //     console.log('Cliente desconectado');
-    //     clearInterval(pingInterval);
-    // });
+    ws.on('close', () => {
+        console.log('Cliente desconectado');
+        wsClients.delete(ws);
+        if (ws._assignInterval) {
+            clearInterval(ws._assignInterval);
+            ws._assignInterval = null;
+        }
+    });
 });
+
+
 
 // Ruta REST simulada
 app.post('/api/lockers/assign', (req, res) => {
     console.log('Llamado a /api/lockers/assign');
     console.log('Headers: ', req.headers);
     console.log('Payload recibido:', req.body);
-    setTimeout(() => {
-        console.log('response');
-        res.json({
-            success: true,
-            message: "Casillero asignado y abierto exitosamente",
-            lockerCode: "F10"
-        });
-    }, 15000);
-    // return res.status(500).json({
-    //     success: false,
-    //     message: 'Error al asignar el casillero',
-    // });
+
+    // Disparar flujo WS al consumir assign
+    // wsClients.forEach((client) => startAssignFlow(client));
+
+    // clearPendingAssign();
+    // pendingAssign = {
+    //     res,
+    //     timer: setTimeout(() => {
+    //     console.log('response');
+    //     res.json({
+    //         success: true,
+    //         message: "Casillero asignado y abierto exitosamente",
+    //         lockerCode: "F10"
+    //     });
+    //     clearPendingAssign();
+    //     }, 15000),
+    // };
+    return res.status(409).json({
+        success: false,
+        message: 'Ya existe casillero asignado para este numero',
+    });
 });
 
 // Ruta REST simulada
 app.post('/api/lockers/open-session', (req, res) => {
-    console.log('Llamado a /api/lockers/open-session');
-    console.log('Headers: ', req.headers);
-    console.log('Payload recibido:', req.body);
-    setTimeout(() => {
-        console.log('response');
-        res.json({
-            success: true,
-            message: "Casillero abierto exitosamente",
-            lockerCode: "B8"
-        });
-    }, 10000);
-    // return res.status(500).json({
-    //     success: false,
-    //     message: 'Error al abrir el casillero',
-    // });
+    // console.log('Llamado a /api/lockers/open-session');
+    // console.log('Headers: ', req.headers);
+    // console.log('Payload recibido:', req.body);
+    // setTimeout(() => {
+    //     console.log('response');
+    //     res.json({
+    //         success: true,
+    //         message: "Casillero abierto exitosamente",
+    //         lockerCode: "B8"
+    //     });
+    // }, 10000);
+    return res.status(604).json({
+        success: false,
+        message: 'Error al abrir el casillero',
+    });
 });
 
 // Ruta REST simulada
