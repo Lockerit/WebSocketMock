@@ -142,25 +142,25 @@ app.post('/api/lockers/assign', (req, res) => {
     console.log('Payload recibido:', req.body);
 
     // Disparar flujo WS al consumir assign
-    // wsClients.forEach((client) => startAssignFlow(client));
+    wsClients.forEach((client) => startAssignFlow(client));
 
-    // clearPendingAssign();
-    // pendingAssign = {
-    //     res,
-    //     timer: setTimeout(() => {
-    //     console.log('response');
-    //     res.json({
-    //         success: true,
-    //         message: "Casillero asignado y abierto exitosamente",
-    //         lockerCode: "F10"
-    //     });
-    //     clearPendingAssign();
-    //     }, 15000),
-    // };
-    return res.status(409).json({
-        success: false,
-        message: 'Ya existe casillero asignado para este numero',
-    });
+    clearPendingAssign();
+    pendingAssign = {
+        res,
+        timer: setTimeout(() => {
+        console.log('response');
+        res.json({
+            success: true,
+            message: "Casillero asignado y abierto exitosamente",
+            lockerCode: "F10"
+        });
+        clearPendingAssign();
+        }, 15000),
+    };
+    // return res.status(409).json({
+    //     success: false,
+    //     message: 'Ya existe casillero asignado para este numero',
+    // });
 });
 
 // Ruta REST simulada
