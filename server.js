@@ -35,7 +35,7 @@ function startAssignFlow(ws) {
     // Enviar mensaje cada 1 segundo
     ws._assignInterval = setInterval(() => {
         if (data.total < 1500) {
-            data.total += 300;
+            data.total += 100;
             data.complete = false;
 
             if (ws.readyState === WebSocket.OPEN) {
@@ -53,7 +53,7 @@ function startAssignFlow(ws) {
             clearInterval(ws._assignInterval);
             ws._assignInterval = null;
         }
-    }, 1000);
+    }, 5000);
 }
 
 app.use(cors());
@@ -165,21 +165,21 @@ app.post('/api/lockers/assign', (req, res) => {
 
 // Ruta REST simulada
 app.post('/api/lockers/open-session', (req, res) => {
-    // console.log('Llamado a /api/lockers/open-session');
-    // console.log('Headers: ', req.headers);
-    // console.log('Payload recibido:', req.body);
-    // setTimeout(() => {
-    //     console.log('response');
-    //     res.json({
-    //         success: true,
-    //         message: "Casillero abierto exitosamente",
-    //         lockerCode: "B8"
-    //     });
-    // }, 10000);
-    return res.status(604).json({
-        success: false,
-        message: 'Error al abrir el casillero',
-    });
+    console.log('Llamado a /api/lockers/open-session');
+    console.log('Headers: ', req.headers);
+    console.log('Payload recibido:', req.body);
+    setTimeout(() => {
+        console.log('response');
+        res.json({
+            success: true,
+            message: "Casillero abierto exitosamente",
+            lockerCode: "B8"
+        });
+    }, 10000);
+    // return res.status(604).json({
+    //     success: false,
+    //     message: 'Error al abrir el casillero',
+    // });
 });
 
 // Ruta REST simulada
@@ -295,6 +295,10 @@ app.get('/api/lockers/get-all-status', (req, res) => {
                     status: "deshabilitado",
                     "total": 6
                 },
+                {
+                    status: "asignado",
+                    "total": 3
+                }
             ],
             modules: [
                 {
@@ -765,7 +769,7 @@ app.get('/api/lockers/get-all-status', (req, res) => {
                         },
                         {
                             lockerCode: "E10",
-                            status: "Libre"
+                            status: "Asignado"
                         }
                     ]
                 },
@@ -863,7 +867,7 @@ app.post('/api/lockers/report', (req, res) => {
                     StartTime: "2025-08-15T15:31:18Z",
                     EndTime: "2025-08-15T15:31:18Z",
                     AmountPaid: 1500,
-                    OpenBy: ""
+                    OpenBy: "Error"
                 },
                 {
                     ID: 4,
@@ -875,7 +879,7 @@ app.post('/api/lockers/report', (req, res) => {
                     StartTime: "2025-08-15T15:31:19Z",
                     EndTime: "2025-08-15T15:31:20Z",
                     AmountPaid: 1500,
-                    OpenBy: ""
+                    OpenBy: "Error"
                 },
                 {
                     ID: 5,
